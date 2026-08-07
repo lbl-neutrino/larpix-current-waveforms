@@ -29,8 +29,8 @@ def dump_waveform(name: str, f: np.lib.npyio.NpzFile, pixel_id: int = 102527):
 def main():
     Path(OUTDIR).mkdir(parents=True, exist_ok=True)
 
-    for h5f in Path(INDIR).glob("*.hdf5"):
-        name = h5f.stem
+    for h5f in Path(INDIR).glob("*.LARND.hdf5"):
+        name = Path(h5f.stem).stem
         f = np.load(f"{h5f}_signals/nf_signals.00.1.npz")
         dump_waveform(name, f)
         print(f"Dumped {name}")
