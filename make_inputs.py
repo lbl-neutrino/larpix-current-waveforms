@@ -26,13 +26,33 @@ DEDX_LOW = 2 * DENSITY_LAR
 DEDX_HIGH = 6 * DENSITY_LAR
 
 
-def gen_parallel_mip():
-    """MIP track parallel to anode and 3cm away (i.e. short current pulse on
-    pixel). Horizontal and slicing through the pixel's center."""
+def gen_parallel(tag: str, dEdx: float):
     mid = MOD_CENTER + A(TILE_X - 3, PITCH / 2, 0)
     start = mid - A(0, 0, 3 * PITCH)
     end = mid + A(0, 0, 3 * PITCH)
-    write_segments(f"{OUTDIR}/parallel_mip.hdf5", [(start, end)], dEdx=DEDX_LOW)
+    write_segments(f"{OUTDIR}/parallel_{tag}.hdf5",
+                   [(start, end)],
+                   dEdx=dEdx)
+
+
+def gen_parallel_mip():
+    gen_parallel('mip', DEDX_LOW)
+
+def gen_parallel_hip():
+    gen_parallel('hip', DEDX_HIGH)
+
+def gen_inclined_mip():
+    pass
+
+
+def gen_double_parallel_mip(sep_mm: float):
+    pass
+
+
+def gen_clipping_mip():
+    pass
+
+
 
 
 def main():

@@ -2,11 +2,11 @@ This repository contains a handful of simulated LArPix analog signals, as predic
 
 ![parallel_mip waveform](plots/parallel_mip.png)
 
-The following scenarios are covered:
+The following scenarios are covered. See `plot_edeps.ipynb` for plots of the energy deposits used as input for the simulation.
 
 - `parallel_mip`: MIP track (2.8 MeV/cm) parallel to anode and 3cm away (i.e. short current pulse on pixel). Horizontal and slicing through the pixel's center.
 - `inclined_mip`: MIP track highly-inclined (85 degrees) to anode, 3-6cm away (i.e. long current pulse on pixel). Horizontal and symmetric about the pixel's center.
-- `double_parallel_mip`: Two anode-parallel MIP tracks on same pixel, closely spaced in time, with separation of 2, 5, and 10 usec (closer track 3cm from anode; horizontal and slicing through the pixel's center)
+- `double_parallel_mip`: Two anode-parallel MIP tracks on same pixel, closely spaced in time, with separation of 2, 5, and 10 mm (closer track 3cm from anode; horizontal and slicing through the pixel's center)
 - `clipping_mip`: MIP track clipping pixel (i.e. small pulse close to ~5000 ke- design self-trigger threshold): Parallel to anode, 45-degrees rotated in the "pixel" plane, 3cm away, shifted upward by 3/4 of a pitch.
 - `parallel_hip`: HIP track (8.4 MeV/cm) on pixel (i.e. pulse with higher peak current on pixel). Same geometry as first case (parallel MIP track).
 - `shower`: Shower on pixel (i.e. long pulse with lots of structure)
@@ -14,7 +14,7 @@ The following scenarios are covered:
 
 ### Waveform files
 
-Waveform files, in text format, can be found in the `waveforms` folder. Each line corresponds to one LArPix clock tick (100 ns); the value on each line is the current on the pixel, in units of e⁻/µs. See `plots.ipynb` for plots of all the waveforms.
+Waveform files, in text format, can be found in the `waveforms` folder. Each line corresponds to one LArPix clock tick (100 ns); the value on each line is the current on the pixel, in units of e⁻/µs. See `plot_waveforms.ipynb` for plots of all the waveforms.
 
 
 ### Reproducing the waveforms
@@ -27,6 +27,6 @@ Run `run_larnd_sim.sh` on a machine with a GPU. This will run larnd-sim on each 
 
 Run `extract_signals.py` to extract the signals and dump them to text. The pixel used is the one immediately above and "to the left of" the midpoint of the anode plane (when viewed from the cathode). This corresponds to pixel `102527` in the FSD.
 
-To plot the waveforms, start a Jupyter session (`jupyter lab`), then open `plots.ipynb` and re-run all cells.
+To plot the waveforms, start a Jupyter session (`jupyter lab`), then open `plot_waveforms.ipynb` and re-run all cells. Similarly, `plot_edeps.ipynb` can be used to plot the edep-sim inputs. 
 
 [^1]: The "shower" waveform was taken from a separate study on simulated showers in the FSD Cube geometry at half-nominal HV. Its location at NERSC, as well as the selected pixel ID, are hard-coded in `extract_signals.py`.
