@@ -17,7 +17,7 @@ Waveform files, in text format, can be found in the `waveforms` folder. Each lin
 
 ### Reproducing the waveforms
 
-Run `install.sh` to set up a Python environment (in the hidden `.venv` directory) and a local installation of larnd-sim.
+Run `install.sh` to set up a Python environment and a local installation of larnd-sim. Activate the environment (`source .venv/bin/activate`) before proceeding.
 
 Run `make_inputs.py` to mock up an edep-sim file for each scenario.
 
@@ -25,11 +25,6 @@ Run `run_larnd_sim.sh` on a machine with a GPU. This will run larnd-sim on each 
 
 Run `extract_signals.py` to extract the signals and dump them to text. The pixel used is the one immediately above and "to the left of" the midpoint of the anode plane (when viewed from the cathode). This corresponds to pixel `102527` in the FSD.
 
-To plot the waveforms, start a Jupyter session:
-``` bash
-source .venv/bin/activate
-jupyter lab
-```
-Then open `plots.ipynb` and re-run all cells.
+To plot the waveforms, start a Jupyter session (`jupyter lab`), then open `plots.ipynb` and re-run all cells.
 
 [^1]: The "shower" waveform was taken from a separate study on simulated showers in the FSD Cube geometry at half-nominal HV. Its location at NERSC, as well as the selected pixel ID, are hard-coded in `extract_signals.py`.
