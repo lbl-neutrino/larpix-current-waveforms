@@ -25,7 +25,7 @@ Run `make_inputs.py` to mock up an edep-sim file for each scenario.
 
 Run `run_larnd_sim.sh` on a machine with a GPU. This will run larnd-sim on each edep-sim file. The `save-wvfm-202608` tag of larnd-sim is used; this tag contains modifications to make it dump the analog signals seen by the pixels.
 
-Run `extract_signals.py` to extract the signals and dump them to text. The pixel used is the one immediately above and "to the left of" the midpoint of the anode plane (when viewed from the cathode). This corresponds to pixel `102527` in the FSD.
+Run `extract_signals.py` to extract the signals and dump them to text. The pixel used is the one immediately "northeast" of the midpoint of the anode plane (when viewed from the cathode). This corresponds to pixel ID `102528` in the FSD.
 
 To plot the waveforms, start a Jupyter session (`jupyter lab`), then open `plot_waveforms.ipynb` and re-run all cells. Similarly, `plot_edeps.ipynb` can be used to plot the edep-sim inputs. 
 

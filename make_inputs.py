@@ -27,9 +27,9 @@ DEDX_HIGH = 6 * DENSITY_LAR
 
 
 def gen_parallel(tag: str, dEdx: float):
-    mid = MOD_CENTER + A(TILE_X - 3, PITCH / 2, 0)
-    start = mid - A(0, 0, 3 * PITCH)
-    end = mid + A(0, 0, 3 * PITCH)
+    mid = MOD_CENTER + A(TILE_X - 3, PITCH / 2, PITCH / 2)
+    delta = A(0, 0, 3 * PITCH)
+    start, end = mid - delta,  mid + delta
     write_segments(f"{OUTDIR}/parallel_{tag}.hdf5",
                    [(start, end)],
                    dEdx=dEdx)
@@ -38,27 +38,39 @@ def gen_parallel(tag: str, dEdx: float):
 def gen_parallel_mip():
     gen_parallel('mip', DEDX_LOW)
 
+
 def gen_parallel_hip():
     gen_parallel('hip', DEDX_HIGH)
 
+
 def gen_inclined_mip():
-    pass
+    mid = MOD_CENTER + A(TILE_X - 3, PITCH / 2, PITCH / 2)
+    delta = A(1, 0, 0.2)
+    start, end = mid - delta,  mid + delta
+    write_segments(f"{OUTDIR}/inclined_mip.hdf5",
+                   [(start, end)],
+                   dEdx=DEDX_LOW)
 
 
 def gen_double_parallel_mip(sep_mm: float):
     pass
 
 
+def gen_all_double_parallel_mip():
+    gen_double_parallel_mip(2)
+    gen_double_parallel_mip(5)
+    gen_double_parallel_mip(10)
+
+
 def gen_clipping_mip():
     pass
-
-
 
 
 def main():
     Path(OUTDIR).mkdir(parents=True, exist_ok=True)
 
     gen_parallel_mip()
+    gen_parallel_hip()
 
 
 if __name__ == "__main__":

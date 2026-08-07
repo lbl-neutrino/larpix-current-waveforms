@@ -13,7 +13,7 @@ SHOWER_FILE = (
 )
 
 
-def dump_waveform(name: str, f: np.lib.npyio.NpzFile, pixel_id: int = 102527):
+def dump_waveform(name: str, f: np.lib.npyio.NpzFile, pixel_id: int = 102528):
     signals, pixels = f["signals_near"], f["pixels_near"]
     i = np.nonzero(pixels == pixel_id)[0][0]
     wvfm = signals[i, :]
