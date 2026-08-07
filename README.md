@@ -2,12 +2,12 @@ This repository contains a handful of simulated LArPix analog signals, as predic
 
 The following scenarios are covered:
 
-- MIP track parallel to anode and 3cm away (i.e. short current pulse on pixel). Horizontal and slicing through the pixel's center.
-- MIP track highly-inclined (85 degrees) to anode, 3-6cm away (i.e. long current pulse on pixel). Horizontal and symmetric about the pixel's center.
-- Two anode-parallel MIP tracks on same pixel, closely spaced in time, with separation of 2, 5, and 10 usec (closer track 3cm from anode; horizontal and slicing through the pixel's center)
-- MIP track clipping pixel (i.e. small pulse close to ~5000 ke- design self-trigger threshold): Parallel to anode, 45-degrees rotated in the "pixel" plane, 3cm away, shifted upward by 3/4 of a pitch.
-- HIP track on pixel (i.e. pulse with higher peak current on pixel). Same geometry as first case (parallel MIP track).
-- Shower on pixel (i.e. long pulse with lots of structure)
+- `parallel_mip`: MIP track (2.8 MeV/cm) parallel to anode and 3cm away (i.e. short current pulse on pixel). Horizontal and slicing through the pixel's center.
+- `inclined_mip`: MIP track highly-inclined (85 degrees) to anode, 3-6cm away (i.e. long current pulse on pixel). Horizontal and symmetric about the pixel's center.
+- `double_parallel_mip`: Two anode-parallel MIP tracks on same pixel, closely spaced in time, with separation of 2, 5, and 10 usec (closer track 3cm from anode; horizontal and slicing through the pixel's center)
+- `clipping_mip`: MIP track clipping pixel (i.e. small pulse close to ~5000 ke- design self-trigger threshold): Parallel to anode, 45-degrees rotated in the "pixel" plane, 3cm away, shifted upward by 3/4 of a pitch.
+- `parallel_hip`: HIP track (8.4 MeV/cm) on pixel (i.e. pulse with higher peak current on pixel). Same geometry as first case (parallel MIP track).
+- `shower`: Shower on pixel (i.e. long pulse with lots of structure)
 
 
 ### Waveform files

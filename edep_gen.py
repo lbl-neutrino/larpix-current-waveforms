@@ -43,12 +43,16 @@ SEGMENTS_DTYPE = np.dtype(
     align=True,
 )
 
+Vec3 = tuple[float, float, float]
 
-def make_segments(xyz_start, xyz_end, dEdx, max_seg_len=0.1):
-    xyz_start = np.asarray(xyz_start)
-    xyz_end = np.asarray(xyz_end)
+def make_segments(xyz_start: Vec3,
+                  xyz_end: Vec3,
+                  dEdx: float,
+                  max_seg_len: float=0.1):
+    start = np.asarray(xyz_start)
+    end = np.asarray(xyz_end)
 
-    dxyz = xyz_end - xyz_start
+    dxyz = end - start
     tot_len = np.sqrt(np.dot(dxyz, dxyz))
     n_seg = int(np.ceil(tot_len / max_seg_len))
     dx = tot_len / n_seg
@@ -61,7 +65,7 @@ def make_segments(xyz_start, xyz_end, dEdx, max_seg_len=0.1):
     result["segment_id"] = ids
 
     for i, c in enumerate(["x", "y", "z"]):
-        result[f"{c}_start"] = xyz_start[i] + ids * dxyz[i] / n_seg
+        result[f"{c}_start"] = start[i] + ids * dxyz[i] / n_seg
         result[f"{c}_end"] = result[f"{c}_start"] + dxyz[i] / n_seg
         result[f"{c}"] = (result[f"{c}_start"] + result[f"{c}_end"]) / 2
 
