@@ -7,7 +7,7 @@ import h5py
 import numpy as np
 import numpy.typing as npt
 
-segments_dtype = np.dtype(
+SEGMENTS_DTYPE = np.dtype(
     [
         ("event_id", "u4"),
         ("vertex_id", "u8"),
@@ -54,8 +54,8 @@ def make_segments(xyz_start, xyz_end, dEdx, max_seg_len=0.1):
     dx = tot_len / n_seg
 
     result: npt.NDArray[np.void] = np.zeros(  # 'astype' needed for ty to shut up
-        (n_seg,), dtype=segments_dtype
-    ).astype(segments_dtype)
+        (n_seg,), dtype=SEGMENTS_DTYPE
+    ).astype(SEGMENTS_DTYPE)
 
     ids = np.array(range(n_seg))
     result["segment_id"] = ids
@@ -72,7 +72,7 @@ def make_segments(xyz_start, xyz_end, dEdx, max_seg_len=0.1):
     return result
 
 
-def write_segments(fname, arglist, **kwargs):
+def write_segments(fname: str, arglist: list[tuple], **kwargs):
     segments = [make_segments(*args, **kwargs) for args in arglist]
     segments = np.concatenate(segments)
     # ensure unique consecutive IDs

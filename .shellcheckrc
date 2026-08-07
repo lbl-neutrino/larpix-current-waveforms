@@ -1,0 +1,3 @@
+# don't warn about sourcing scripts that "don't exist"
+# (e.g. .venv/bin/activate)
+disable=SC1091
