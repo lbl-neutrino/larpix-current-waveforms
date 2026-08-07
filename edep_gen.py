@@ -78,5 +78,5 @@ def write_segments(fname: str, arglist: list[tuple], **kwargs):
     # ensure unique consecutive IDs
     segments["segment_id"] = np.array(range(segments.shape[0]))
 
-    with h5py.File(fname, 'w') as f:
-        f.create_dataset('segments', data=segments)
+    with h5py.File(fname, "w") as f:
+        f.create_dataset("segments", data=segments)

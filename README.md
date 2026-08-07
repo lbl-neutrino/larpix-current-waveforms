@@ -1,4 +1,4 @@
-This repository contains a handful of simulated LArPix analog signals, as predicted by larnd-sim. The simulation, in most cases[^1], is based on that of the Full Scale Demonstrator, whose v2d tiles have the same pixel pitch as v3. The full nominal HV is assumed, corresponding to a drift velocity of 1.6 mm/usec.
+This repository contains a handful of simulated LArPix analog signals, as predicted by larnd-sim. The simulation, in most cases,[^1] is based on that of the Full Scale Demonstrator, whose v2d tiles have the same pixel pitch as v3. The full nominal HV is assumed, corresponding to a drift velocity of 1.6 mm/µs.
 
 The following scenarios are covered:
 
@@ -9,7 +9,10 @@ The following scenarios are covered:
 - HIP track on pixel (i.e. pulse with higher peak current on pixel). Same geometry as first case (parallel MIP track).
 - Shower on pixel (i.e. long pulse with lots of structure)
 
-Waveform files, in text format, can be found in the `waveforms` folder. Each line corresponds to one LArPix clock tick (100 ns); the value on each line is the current on the pixel, in units of e-/usec. See `traces.ipynb` for the signal traces.
+
+### Waveform files
+
+Waveform files, in text format, can be found in the `waveforms` folder. Each line corresponds to one LArPix clock tick (100 ns); the value on each line is the current on the pixel, in units of e⁻/µs. See `traces.ipynb` for the signal traces.
 
 
 ### Reproducing the waveforms
@@ -28,7 +31,5 @@ source .venv/bin/activate
 jupyter lab
 ```
 Then open `traces.ipynb` and re-run all cells.
-
-### Footnotes
 
 [^1]: The "shower" waveform was taken from a separate study on simulated showers in the FSD Cube geometry at half-nominal HV. Its location at NERSC is hard-coded in `extract_signals.py`.
