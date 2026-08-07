@@ -23,7 +23,7 @@ Run `make_inputs.py` to mock up an edep-sim file for each scenario.
 
 Run `run_larnd_sim.sh` on a machine with a GPU. This will run larnd-sim on each edep-sim file. The `save-wvfm-202608` tag of larnd-sim is used; this tag contains modifications to make it dump the analog signals seen by the pixels.
 
-Run `extract_signals.py` to extract the signals and dump them to text. The pixel in question is the one immediately above and "to the left of" the midpoint of the anode plane (when viewed from the cathode). This corresponds to pixel `102527` in the FSD.
+Run `extract_signals.py` to extract the signals and dump them to text. The pixel used is the one immediately above and "to the left of" the midpoint of the anode plane (when viewed from the cathode). This corresponds to pixel `102527` in the FSD.
 
 To plot the signal traces, start a Jupyter session:
 ``` bash
@@ -32,4 +32,4 @@ jupyter lab
 ```
 Then open `traces.ipynb` and re-run all cells.
 
-[^1]: The "shower" waveform was taken from a separate study on simulated showers in the FSD Cube geometry at half-nominal HV. Its location at NERSC is hard-coded in `extract_signals.py`.
+[^1]: The "shower" waveform was taken from a separate study on simulated showers in the FSD Cube geometry at half-nominal HV. Its location at NERSC, as well as the selected pixel ID, are hard-coded in `extract_signals.py`.
