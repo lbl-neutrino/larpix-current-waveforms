@@ -1,5 +1,7 @@
 This repository contains a handful of simulated LArPix analog signals, as predicted by larnd-sim. The simulation, in most cases,[^1] is based on that of the Full Scale Demonstrator, whose v2d tiles have the same pixel pitch as v3. The full nominal HV is assumed, corresponding to a drift velocity of 1.6 mm/µs.
 
+![parallel_mip waveform](plots/parallel_mip.png)
+
 The following scenarios are covered:
 
 - `parallel_mip`: MIP track (2.8 MeV/cm) parallel to anode and 3cm away (i.e. short current pulse on pixel). Horizontal and slicing through the pixel's center.
