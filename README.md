@@ -5,7 +5,7 @@ This repository contains a handful of simulated LArPix analog signals, as predic
 The following scenarios are covered. See `plot_edeps.ipynb` for plots of the energy deposits used as input for the simulation.
 
 - `parallel_mip`: MIP track (2.8 MeV/cm) parallel to anode and 3cm away (i.e. short current pulse on pixel). Horizontal and slicing through the pixel's center.
-- `inclined_mip`: MIP track highly-inclined (85 degrees) to anode, 3-6cm away (i.e. long current pulse on pixel). Horizontal and symmetric about the pixel's center.
+- `inclined_mip`: MIP track highly-inclined to anode (10:1 aspect ratio), 2-4cm away (i.e. long current pulse on pixel). Horizontal and symmetric about the pixel's center.
 - `double_parallel_mip`: Two anode-parallel MIP tracks on same pixel, closely spaced in time, with separation of 2, 5, and 10 mm (closer track 3cm from anode; horizontal and slicing through the pixel's center)
 - `clipping_mip`: MIP track clipping pixel (i.e. small pulse close to ~5000 ke- design self-trigger threshold): Parallel to anode, 45-degrees rotated in the "pixel" plane, 3cm away, shifted upward by 3/4 of a pitch.
 - `parallel_hip`: HIP track (8.4 MeV/cm) on pixel (i.e. pulse with higher peak current on pixel). Same geometry as first case (parallel MIP track).
