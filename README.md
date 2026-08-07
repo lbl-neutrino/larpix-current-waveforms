@@ -17,4 +17,4 @@ First, an edep-sim file was mocked up for each scenario. See `make_inputs.ipynb`
 
 Then, larnd-sim was run on each edep-sim file. The `FIXME` tag of larnd-sim was used; this tag contains modifications to make it dump the analog signals seen by the pixels. See `run_all_larnd_sim.sh`.
 
-Finally, the signals were extracted and dumped to text. See `extract_signals.ipynb`. The pixel in question is the one immediately above the midpoint of the anode plane.
+Finally, the signals were extracted and dumped to text. See `extract_signals.ipynb`. The pixel in question is the one immediately above and "to the left of" (when viewed from the cathode) the midpoint of the anode plane. This corresponds to pixel `102527` in the FSD.
