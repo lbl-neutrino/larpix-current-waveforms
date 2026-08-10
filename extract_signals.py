@@ -44,8 +44,11 @@ def main():
         f = np.load(f"{h5f}_signals/nf_signals.00.1.npz")
         for sigtype in ['near', 'far']:
             name = Path(h5f.stem).stem + '_' + sigtype
-            dump_waveform(name, f, sigtype=sigtype)
-            print(f"Dumped {name}")
+            try:
+                dump_waveform(name, f, sigtype=sigtype)
+                print(f"Dumped {name}")
+            except:
+                print(f"Failed on {name}")
 
 
 if __name__ == "__main__":
