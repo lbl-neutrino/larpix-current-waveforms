@@ -17,9 +17,8 @@ def A(*a, **kw) -> np.ndarray:
 
 OUTDIR = "data/edep-sim"
 
-MOD_CENTER = A(0, 0, 0)  # fsd.yaml
-TILE_X = 47.1055  # multi_tile_layout-3.0.40_fsd_v3.yaml
-PITCH = 0.372  # multi_tile_layout-3.0.40_fsd_v3.yaml
+TILE_CENTER = A(48.0675, 133.92, 23.808)  # multi_tile_layout-3.0.40_fsdcube.yaml
+PITCH = 0.372  # ditto
 
 DENSITY_LAR = 1.40
 DEDX_LOW = 2 * DENSITY_LAR
@@ -27,7 +26,7 @@ DEDX_HIGH = 6 * DENSITY_LAR
 
 
 def gen_blip():
-    mid = MOD_CENTER + A(TILE_X - 10, PITCH / 2, 4 * PITCH)
+    mid = TILE_CENTER + A(-10, PITCH / 2, 4 * PITCH)
     delta = A(0.025, 0, 0)
     start, end = mid - delta, mid + delta
     write_segments(

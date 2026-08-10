@@ -7,9 +7,17 @@ import numpy as np
 INDIR = "data/larnd-sim"
 OUTDIR = "waveforms"
 
+# FSD Cube
+NPIX_X = 8 * 16
+NPIX_Y = 8 * 10
+NPIX_TOT = NPIX_X * NPIX_Y
+
+# Pixel directly northeast of tile center
+PIXEL_ID = int((NPIX_TOT / 2) - (NPIX_X / 2))
+
 
 def dump_waveform(
-    name: str, f: np.lib.npyio.NpzFile, pixel_id: int = 102528, sigtype="near"
+    name: str, f: np.lib.npyio.NpzFile, pixel_id: int = PIXEL_ID, sigtype="near"
 ):
     assert sigtype in ["near", "far"]
     signals = f["signals_near"] if sigtype == "near" else f["signals_ff_plus"]
@@ -26,7 +34,7 @@ def dump_waveform(
     wvfm = wvfm[: end_tick + 1]
     if end_tick != wvfm.shape[0] - 1:
         assert wvfm[-1] == 0
-    np.savetxt(f"{OUTDIR}/{name}.txt", wvfm, fmt="%.6f")
+    np.savetxt(f"{OUTDIR}/{name}.pix{pixel_id}.txt", wvfm, fmt="%.6f")
 
 
 def main():
