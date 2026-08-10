@@ -14,7 +14,7 @@ if [[ -z "$CUDA_HOME" ]]; then
     export SKIP_CUPY_INSTALL=1
 fi
 
-git clone --depth 1 -b save-wvfm-202608 https://github.com/DUNE/larnd-sim
+git clone -b ffe-test https://github.com/DUNE/larnd-sim
 cd larnd-sim || (echo "Could not clone repo"; exit)
 pip install -e .
 

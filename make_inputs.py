@@ -26,67 +26,19 @@ DEDX_LOW = 2 * DENSITY_LAR
 DEDX_HIGH = 6 * DENSITY_LAR
 
 
-def gen_parallel(tag: str, dEdx: float):
-    mid = MOD_CENTER + A(TILE_X - 3, PITCH / 2, PITCH / 2)
-    delta = A(0, 0, 1.5 * PITCH)
-    start, end = mid - delta,  mid + delta
-    write_segments(f"{OUTDIR}/parallel_{tag}.hdf5",
-                   [(start, end)],
-                   dEdx=dEdx)
-
-
-def gen_parallel_mip():
-    gen_parallel('mip', DEDX_LOW)
-
-
-def gen_parallel_hip():
-    gen_parallel('hip', DEDX_HIGH)
-
-
-def gen_inclined_mip():
-    mid = MOD_CENTER + A(TILE_X - 3, PITCH / 2, PITCH / 2)
-    delta = A(1, 0, 0.2)
-    start, end = mid - delta,  mid + delta
-    write_segments(f"{OUTDIR}/inclined_mip.hdf5",
-                   [(start, end)],
-                   dEdx=DEDX_LOW)
-
-
-def gen_double_parallel_mip(sep_mm: float):
-    arglist = []
-    for shift in [0, 0.1 * sep_mm]:
-        mid = MOD_CENTER + A(TILE_X - 3, PITCH / 2, PITCH / 2) + A(-shift, 0, 0)
-        delta = A(0, 0, 1.5 * PITCH)
-        start, end = mid - delta,  mid + delta
-        arglist.append((start, end))
-    write_segments(f"{OUTDIR}/double_parallel_mip_{sep_mm:02}mm.hdf5",
-                   arglist,
-                   dEdx=DEDX_LOW)
-
-
-def gen_all_double_parallel_mip():
-    gen_double_parallel_mip(2)
-    gen_double_parallel_mip(5)
-    gen_double_parallel_mip(10)
-
-
-def gen_clipping_mip():
-    mid = MOD_CENTER + A(TILE_X - 3, PITCH, PITCH / 2)
-    delta = A(0, 0.5, 0.5)
-    start, end = mid - delta, mid + 0.5*delta
-    write_segments(f"{OUTDIR}/clipping_mip.hdf5",
-                   [(start, end)],
-                   dEdx=DEDX_LOW)
+def gen_blip():
+    mid = MOD_CENTER + A(TILE_X - 10, PITCH / 2, 4 * PITCH)
+    delta = A(0.025, 0, 0)
+    start, end = mid - delta, mid + delta
+    write_segments(
+        f"{OUTDIR}/blip_x10cm_z4p_l0.05_dEdx20.hdf5", [(start, end)], dEdx=20
+    )
 
 
 def main():
     Path(OUTDIR).mkdir(parents=True, exist_ok=True)
 
-    gen_parallel_mip()
-    gen_parallel_hip()
-    gen_inclined_mip()
-    gen_clipping_mip()
-    gen_all_double_parallel_mip()
+    gen_blip()
 
 
 if __name__ == "__main__":
