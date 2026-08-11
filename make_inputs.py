@@ -34,10 +34,38 @@ def gen_blip():
     )
 
 
+def gen_blip_nudged():
+    mid = TILE_CENTER + A(-10, PITCH / 2, 4.25 * PITCH)
+    delta = A(0.025, 0, 0)
+    start, end = mid - delta, mid + delta
+    write_segments(
+        f"{OUTDIR}/blip_x10cm_z4.25p_l0.05_dEdx20.hdf5", [(start, end)], dEdx=20
+    )
+
+def gen_blip_nudged2():
+    mid = TILE_CENTER + A(-10, PITCH / 2, 3.75 * PITCH)
+    delta = A(0.025, 0, 0)
+    start, end = mid - delta, mid + delta
+    write_segments(
+        f"{OUTDIR}/blip_x10cm_z3.75p_l0.05_dEdx20.hdf5", [(start, end)], dEdx=20
+    )
+
+def gen_blip_center():
+    mid = TILE_CENTER
+    delta = A(0.025, 0, 0)
+    start, end = mid - delta, mid + delta
+    write_segments(
+        f"{OUTDIR}/blip_center.hdf5", [(start, end)], dEdx=20
+    )
+
+
 def main():
     Path(OUTDIR).mkdir(parents=True, exist_ok=True)
 
     gen_blip()
+    gen_blip_nudged()
+    gen_blip_nudged2()
+    gen_blip_center()
 
 
 if __name__ == "__main__":

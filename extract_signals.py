@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
+from traceback import print_exc
 
 import numpy as np
 
@@ -15,6 +16,12 @@ NPIX_TOT = NPIX_X * NPIX_Y
 # Pixel directly northeast of tile center
 PIXEL_ID = int((NPIX_TOT / 2) - (NPIX_X / 2))
 
+RED = "\033[31m"
+GREEN = "\033[32m"
+RESET = "\033[0m"
+
+def color(code, text):
+    return f"{code}{text}{RESET}"
 
 def dump_waveform(
     name: str, f: np.lib.npyio.NpzFile, pixel_id: int = PIXEL_ID, sigtype="near"
@@ -29,7 +36,10 @@ def dump_waveform(
     i = np.nonzero(pixels == pixel_id)[0][0]
     wvfm = signals[i, :]
     # end_tick is the index of the first padding value
-    end_tick = max(np.nonzero(~np.isclose(wvfm, 0))[0]) + 1
+    try:
+        end_tick = max(np.nonzero(~np.isclose(wvfm, 0))[0]) + 1
+    except:
+        end_tick = wvfm.shape[0] - 1
     end_tick = min(end_tick, wvfm.shape[0] - 1)
     wvfm = wvfm[: end_tick + 1]
     if end_tick != wvfm.shape[0] - 1:
@@ -40,15 +50,16 @@ def dump_waveform(
 def main():
     Path(OUTDIR).mkdir(parents=True, exist_ok=True)
 
-    for h5f in Path(INDIR).glob("*.LARND.hdf5"):
+    for h5f in sorted(Path(INDIR).glob("*.LARND.hdf5")):
         f = np.load(f"{h5f}_signals/nf_signals.00.1.npz")
         for sigtype in ['near', 'far']:
             name = Path(h5f.stem).stem + '_' + sigtype
             try:
                 dump_waveform(name, f, sigtype=sigtype)
-                print(f"Dumped {name}")
+                print(color(GREEN, f"Dumped {name}"))
             except:
-                print(f"Failed on {name}")
+                print(color(RED, f"Failed on {name}"))
+                print_exc()
 
 
 if __name__ == "__main__":
