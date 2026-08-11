@@ -26,13 +26,19 @@ def color(code, text):
 def dump_waveform(
     name: str, f: np.lib.npyio.NpzFile, pixel_id: int = PIXEL_ID, sigtype="near"
 ):
-    assert sigtype in ["near", "far"]
-    signals = f["signals_near"] if sigtype == "near" else f["signals_ff_plus"]
-    pixels = f["pixels_near"]
-    if sigtype == "ff_plus":
+    assert sigtype in ["near", "far", 'farOnly']
+    if sigtype == 'near':
+        signals, pixels = f["signals_near"], f["pixels_near"]
+    elif sigtype == 'far':
+        signals, pixels = f["signals_ff_plus"], f["pixels_near"]
+    elif sigtype == 'farOnly':
+        signals, pixels = f["signals_ff_only"], f["pixels_ff_only"]
+
+    if sigtype == "far":
         assert np.all(f["mask_ff_plus"]) and (
             f["mask_ff_plus"].shape == f["pixels_near"].shape
         )
+
     i = np.nonzero(pixels == pixel_id)[0][0]
     wvfm = signals[i, :]
     # end_tick is the index of the first padding value
@@ -51,8 +57,13 @@ def main():
     Path(OUTDIR).mkdir(parents=True, exist_ok=True)
 
     for h5f in sorted(Path(INDIR).glob("*.LARND.hdf5")):
-        f = np.load(f"{h5f}_signals/nf_signals.00.1.npz")
-        for sigtype in ['near', 'far']:
+        if Path(f"{h5f}_signals/signals.00.1.npz").exists():
+            f = np.load(f"{h5f}_signals/signals.00.1.npz")
+            sigtypes = ['near', 'far', 'farOnly']
+        else:
+            f = np.load(f"{h5f}_signals/nf_signals.00.1.npz")
+            sigtypes = ['near', 'far']
+        for sigtype in sigtypes:
             name = Path(h5f.stem).stem + '_' + sigtype
             try:
                 dump_waveform(name, f, sigtype=sigtype)
