@@ -8,9 +8,9 @@ import numpy as np
 INDIR = "data/larnd-sim"
 OUTDIR = "waveforms"
 
-# FSD Cube
-NPIX_X = 8 * 16
-NPIX_Y = 8 * 10
+# 2x2 module 0/1/3
+NPIX_X = 7 * 10 * 2
+NPIX_Y = 7 * 10 * 4
 NPIX_TOT = NPIX_X * NPIX_Y
 
 # Pixel directly northeast of tile center

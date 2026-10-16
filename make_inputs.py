@@ -17,8 +17,8 @@ def A(*a, **kw) -> np.ndarray:
 
 OUTDIR = "data/edep-sim"
 
-TILE_CENTER = A(48.0675, 133.92, 23.808)  # multi_tile_layout-3.0.40_fsdcube.yaml
-PITCH = 0.372  # ditto
+TILE_CENTER = A(33.5, 0, 33.5) + A(30.58975) # 2x2.yaml + multi_tile_layout-2.4.16_v4.yaml
+PITCH = 0.4434  # multi_tile_layout-2.4.16_v4.yaml
 
 DENSITY_LAR = 1.40
 DEDX_LOW = 2 * DENSITY_LAR
